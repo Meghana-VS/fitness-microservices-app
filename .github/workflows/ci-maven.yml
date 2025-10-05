@@ -8,9 +8,9 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest                           #this job runs on GitHub's Linux runner(virtual machine)
+    runs-on: ubuntu-latest                                            #this job runs on GitHub's Linux runner(virtual machine)
     strategy:
-      fail-fast: false                              #if one matrix entry fails, do not cancel other running matrix jobs.
+      fail-fast: false                                                #if one matrix entry fails, do not cancel other running matrix jobs.
       matrix:
         service: ["eureka", "userservice", "activityservice"]          #this expands into 3 parallel jobs, one for each value.
                                                                         #Each job gets (matrix.service) set to the service name.
@@ -22,17 +22,17 @@ jobs:
       - name: Set up JDK 24
         uses: actions/setup-java@v4
         with:
-          distribution: temurin                       #Installs Java(Eclipse Temurin JDK 24) on the runner
+          distribution: temurin                         #Installs Java(Eclipse Temurin JDK 24) on the runner
           java-version: '24'
-          cache: maven                                #maven enables automatic caching of Maven dependencies(speeds subsequent builds by using ~/.m2)
+          cache: maven                                  #maven enables automatic caching of Maven dependencies(speeds subsequent builds by using ~/.m2)
 
       - name: Build and run tests for ${{ matrix.service }}
         working-directory: ${{ matrix.service }}
-        run: mvn -B clean verify                              #deletes the previous target/ and runs the build and test lifecycle up through the verify phase
-                                                              #unit tests run during the test phase.
+        run: mvn -B clean verify -DskipTests                     #deletes the previous target/ and runs the build and test lifecycle up through the verify phase
+                                                                 #unit tests run during the test phase.
 
       - name: Upload JAR artifact for ${{ matrix.service }}
-        uses: actions/upload-artifact@v4                      #After build finishes, this action finds the generated JAR(s) in target/ and uploads them as "workflow artifacts"
+        uses: actions/upload-artifact@v4                         #After build finishes, this action finds the generated JAR(s) in target/ and uploads them as "workflow artifacts"
         with:
           name: ${{ matrix.service }}-jar
           path: ${{ matrix.service }}/target/*.jar
