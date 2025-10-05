@@ -12,7 +12,7 @@ jobs:
     strategy:
       fail-fast: false                              #if one matrix entry fails, do not cancel other running matrix jobs.
       matrix:
-        services: ["eureka", "userservice", "activityservice"]          #this expands into 3 parallel jobs, one for each value.
+        service: ["eureka", "userservice", "activityservice"]          #this expands into 3 parallel jobs, one for each value.
                                                                         #Each job gets (matrix.service) set to the service name.
 
     steps:
