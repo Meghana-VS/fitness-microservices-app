@@ -19,11 +19,11 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Set up JDK 24
+      - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
           distribution: temurin                         #Installs Java(Eclipse Temurin JDK 24) on the runner
-          java-version: '24'
+          java-version: '21'
           cache: maven                                  #maven enables automatic caching of Maven dependencies(speeds subsequent builds by using ~/.m2)
 
       - name: Build and run tests for ${{ matrix.service }}
