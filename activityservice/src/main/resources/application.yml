@@ -1,6 +1,11 @@
 spring:
   application:
     name: activityservice
+  management:
+    endpoints:
+      web:
+        exposure:
+          include: health, info
   data:
     mongodb:
       uri: mongodb://localhost:27017/aiactivityfitness

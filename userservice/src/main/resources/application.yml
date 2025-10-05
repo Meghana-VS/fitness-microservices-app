@@ -1,6 +1,11 @@
 spring:
   application:
     name: userservice
+  management:
+    endpoints:
+      web:
+        exposure:
+          include: health, info
   datasource:
     url: jdbc:postgresql://localhost:5432/fitness_user_db
     username: postgres
