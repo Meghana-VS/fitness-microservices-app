@@ -34,5 +34,5 @@ jobs:
       - name: Upload JAR artifact for ${{ matrix.service }}
         uses: actions/upload-artifact@v4                      #After build finishes, this action finds the generated JAR(s) in target/ and uploads them as "workflow artifacts"
         with:
-          name: {{ matrix.service }}-jar
-          path: {{ matrix.service }}/target/*.jar
+          name: ${{ matrix.service }}-jar
+          path: ${{ matrix.service }}/target/*.jar
